@@ -1,0 +1,13 @@
+{
+  "id": "tejassinghthanos/hunyuan3d-2-gradio-app",
+  "title": "Hunyuan3D-2 Gradio App",
+  "code_file": "hunyuan3d_gradio_app.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": []
+}
