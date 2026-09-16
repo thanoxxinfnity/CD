@@ -1,35 +1,23 @@
-# Zombie Survival — Godot + Hunyuan3D-2
+# Hunyuan3D-2 Game Asset Generator
 
-A small first-person zombie survival prototype in Godot 4, plus a Kaggle
-notebook that generates 3D game assets from images using Tencent's
-Hunyuan3D-2 model.
+Kaggle notebook that generates 3D game assets (zombie, building, prop) from
+scratch: text-to-image for concept art, then Tencent's **Hunyuan3D-2**
+model to convert each image into a `.glb` 3D mesh — all running on Kaggle's
+free GPU, no paid API involved.
 
 ## Structure
 
-- `godot/` — the playable Godot 4 project.
-  - `scenes/Main.tscn` — entry point (map + HUD + wave timer).
-  - `scenes/Map.tscn` — ground, 6 placeholder buildings, 4 zombie spawners,
-    player spawn.
-  - `scenes/Player.tscn` / `scripts/Player.gd` — WASD + mouse-look FPS
-    controller, left-click to shoot (raycast).
-  - `scenes/Zombie.tscn` / `scripts/Zombie.gd` — chases and attacks the
-    player, has health/take_damage.
-  - `scripts/ZombieSpawner.gd` — timed spawning, ramps up per wave.
-  - `scripts/GameManager.gd` — autoloaded global state (health, wave,
-    score, game over signal).
-  - `assets/generated_models/` — drop Hunyuan3D-generated `.glb` files
-    here (see its `README.md`).
-- `kaggle/` — `hunyuan3d_generate.ipynb` (run on Kaggle's free GPU to turn
-  concept images into `.glb` models) plus instructions for running it via
-  the website or pushing it with the Kaggle API/CLI.
+- `kaggle/hunyuan3d_generate.ipynb` — the notebook. Generates concept
+  images, sets up Hunyuan3D-2, converts each image to a `.glb`, and zips
+  the results.
+- `kaggle/kernel-metadata.json` — metadata for pushing the notebook via
+  the Kaggle CLI (`kaggle kernels push`).
+- `kaggle/README.md` — how to run it: either upload it on kaggle.com
+  directly (no token needed), or push/pull it with your Kaggle API token
+  from the command line.
 
-## Running the game
+## Quick start
 
-Open `godot/project.godot` in Godot **4.3+**, then press F5 (or the Play
-button). Controls: WASD move, mouse look, Space jump, Shift sprint, left
-click shoot, Esc to release the mouse.
-
-Everything currently uses placeholder geometry (colored boxes/capsules) —
-buildings are boxes, the zombie is a green box. See `kaggle/README.md` to
-generate real models and `godot/assets/generated_models/README.md` to
-swap them in.
+See `kaggle/README.md`. Short version: upload `hunyuan3d_generate.ipynb`
+to a new Kaggle notebook, turn on GPU in the notebook settings, run all
+cells, download `generated_models.zip` from the Output tab.

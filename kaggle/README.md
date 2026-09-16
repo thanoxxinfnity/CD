@@ -1,9 +1,9 @@
-# Hunyuan3D-2 asset generation (Kaggle)
+# Hunyuan3D-2 game asset generation (Kaggle)
 
-Generates game-ready `.glb` 3D models for the zombie survival prototype in
-`../godot/`, using Tencent's **Hunyuan3D-2** image-to-3D model on Kaggle's
-free GPU (T4 x2 / P100). No API calls to a paid service — the model runs
-directly in the notebook.
+Generates game-ready `.glb` 3D models (zombie, building, prop) using
+Tencent's **Hunyuan3D-2** image-to-3D model on Kaggle's free GPU
+(T4 x2 / P100). No API calls to a paid service — the model runs directly
+in the notebook.
 
 ## Option A — run it in the browser (simplest, no token needed)
 
@@ -41,6 +41,8 @@ Only needed if you want to script the upload instead of using the website.
 
 ## After generation
 
-Unzip `generated_models.zip` and copy the `.glb` files into
-`godot/assets/generated_models/` — see that folder's `README.md` for how to
-wire a generated model into the `Player`/`Zombie`/building scenes.
+Unzip `generated_models.zip` — you'll have one `.glb` per concept image
+(`zombie.glb`, `building.glb`, `prop.glb`, plus `_textured.glb` versions if
+the optional texture-painting step built successfully). These are plain
+glTF binary files, importable into any engine (Godot, Unity, Unreal,
+Blender, etc.) or viewable directly at https://gltf-viewer.donmccurdy.com/.
