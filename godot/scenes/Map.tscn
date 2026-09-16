@@ -1,0 +1,148 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/ZombieSpawner.gd" id="2"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+ambient_light_source = 2
+ambient_light_color = Color(0.35, 0.38, 0.45, 1)
+ambient_light_energy = 0.6
+fog_enabled = true
+fog_light_color = Color(0.05, 0.06, 0.08, 1)
+fog_density = 0.015
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
+size = Vector3(60, 1, 60)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
+size = Vector2(60, 60)
+
+[sub_resource type="StandardMaterial3D" id="Material_ground"]
+albedo_color = Color(0.13, 0.14, 0.13, 1)
+roughness = 0.9
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_building"]
+size = Vector3(1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_building"]
+size = Vector3(1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Material_building"]
+albedo_color = Color(0.35, 0.32, 0.3, 1)
+roughness = 1.0
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_1"]
+
+[node name="Map" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.8, -0.5, 0.33, 0, 0.55, 0.83, -0.6, -0.66, 0.44, 0, 12, 0)
+light_energy = 0.8
+shadow_enabled = true
+
+[node name="NavRegion" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_1")
+
+[node name="Ground" type="StaticBody3D" parent="NavRegion"]
+collision_layer = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_ground")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Ground"]
+mesh = SubResource("PlaneMesh_ground")
+surface_material_override/0 = SubResource("Material_ground")
+
+[node name="Buildings" type="Node3D" parent="."]
+
+[node name="Building1" type="StaticBody3D" parent="Buildings"]
+transform = Transform3D(6, 0, 0, 0, 4, 0, 0, 0, 6, -14, 2, -10)
+collision_layer = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Buildings/Building1"]
+shape = SubResource("BoxShape3D_building")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Buildings/Building1"]
+mesh = SubResource("BoxMesh_building")
+surface_material_override/0 = SubResource("Material_building")
+
+[node name="Building2" type="StaticBody3D" parent="Buildings"]
+transform = Transform3D(5, 0, 0, 0, 6, 0, 0, 0, 5, 12, 3, -14)
+collision_layer = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Buildings/Building2"]
+shape = SubResource("BoxShape3D_building")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Buildings/Building2"]
+mesh = SubResource("BoxMesh_building")
+surface_material_override/0 = SubResource("Material_building")
+
+[node name="Building3" type="StaticBody3D" parent="Buildings"]
+transform = Transform3D(8, 0, 0, 0, 3, 0, 0, 0, 4, 16, 1.5, 8)
+collision_layer = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Buildings/Building3"]
+shape = SubResource("BoxShape3D_building")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Buildings/Building3"]
+mesh = SubResource("BoxMesh_building")
+surface_material_override/0 = SubResource("Material_building")
+
+[node name="Building4" type="StaticBody3D" parent="Buildings"]
+transform = Transform3D(4, 0, 0, 0, 5, 0, 0, 0, 9, -16, 2.5, 10)
+collision_layer = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Buildings/Building4"]
+shape = SubResource("BoxShape3D_building")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Buildings/Building4"]
+mesh = SubResource("BoxMesh_building")
+surface_material_override/0 = SubResource("Material_building")
+
+[node name="Building5" type="StaticBody3D" parent="Buildings"]
+transform = Transform3D(7, 0, 0, 0, 4, 0, 0, 0, 3, 0, 2, -20)
+collision_layer = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Buildings/Building5"]
+shape = SubResource("BoxShape3D_building")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Buildings/Building5"]
+mesh = SubResource("BoxMesh_building")
+surface_material_override/0 = SubResource("Material_building")
+
+[node name="Building6" type="StaticBody3D" parent="Buildings"]
+transform = Transform3D(3, 0, 0, 0, 7, 0, 0, 0, 3, 3, 3.5, 20)
+collision_layer = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Buildings/Building6"]
+shape = SubResource("BoxShape3D_building")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Buildings/Building6"]
+mesh = SubResource("BoxMesh_building")
+surface_material_override/0 = SubResource("Material_building")
+
+[node name="Player" parent="." instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="ZombieSpawners" type="Node3D" parent="."]
+
+[node name="Spawner_N" type="Node3D" parent="ZombieSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -26)
+script = ExtResource("2")
+
+[node name="Spawner_S" type="Node3D" parent="ZombieSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 26)
+script = ExtResource("2")
+
+[node name="Spawner_E" type="Node3D" parent="ZombieSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 1, 0)
+script = ExtResource("2")
+
+[node name="Spawner_W" type="Node3D" parent="ZombieSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 1, 0)
+script = ExtResource("2")
